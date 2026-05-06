@@ -52,7 +52,7 @@ processor = BlipProcessor.from_pretrained(base_model_id)
 base_model = BlipForConditionalGeneration.from_pretrained(base_model_id)
 
 print("⏳ Memasang Adaptor LoRA...")
-lora_path = "checkpoints/best_lora_model"
+lora_path = "Blip_Training_LoRA_Final/checkpoints/best_lora_model"
 blip_lora_model = PeftModel.from_pretrained(base_model, lora_path)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 blip_lora_model.to(device)

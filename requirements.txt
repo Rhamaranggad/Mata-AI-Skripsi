@@ -1,7 +1,7 @@
 streamlit
 google-generativeai
 gTTS
-opencv-python
+opencv-python-headlessgit
 Pillow
 numpy
 torch

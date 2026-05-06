@@ -1,0 +1,14 @@
+# Jangan push file suara sampah hasil generate
+*.mp3
+
+# Jangan push cache python
+__pycache__/
+*.pyc
+
+# Jangan push file log kalau isinya data test lu
+# (Hapus baris ini kalau lu sengaja mau pamerin log CSV lu ke dosen)
+log_evaluasi.csv
+
+# Jangan push rahasia
+.env
+.streamlit/secrets.toml

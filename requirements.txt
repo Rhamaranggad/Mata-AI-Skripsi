@@ -1,0 +1,9 @@
+streamlit
+google-generativeai
+gTTS
+opencv-python
+Pillow
+numpy
+torch
+transformers
+peft

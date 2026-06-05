@@ -95,7 +95,6 @@ gambar_kamera = st.camera_input("📸 Jepret Foto Langsung")
 gambar_galeri = st.file_uploader("📂 Atau Pilih dari Galeri HP", type=["jpg", "jpeg", "png"])
 
 # LOGIKA CERDAS: Prioritaskan kamera. Kalau kamera kosong, baru pakai galeri.
-# Dengan pakai nama variabel 'uploaded_file', kode lu yang di bawah NGGAK PERLU DIUBAH sama sekali!
 uploaded_file = gambar_kamera if gambar_kamera is not None else gambar_galeri
 
 if uploaded_file is not None:
@@ -185,7 +184,7 @@ if uploaded_file is not None:
                 baris = hasil.split('\n')
                 
                 # Kasih nilai default dulu biar kalau Gemini lupa, sistem nggak crash
-                deskripsi = hasil # Kalau format hancur, anggap semua teks adalah deskripsi
+                deskripsi = hasil 
                 skor = "Tidak diketahui"
                 alasan = "Sistem AI tidak memberikan alasan."
 
@@ -211,13 +210,13 @@ if uploaded_file is not None:
                     st.write(f"**Rasionalisasi Gemini:** {alasan}")
 
             except Exception as e:
-                # Ini cuma kepanggil kalau bener-bener error parah dari Python-nya
                 st.warning("Terjadi kesalahan saat membaca teks dari AI.")
                 st.write(hasil)
 
         # FITUR FEEDBACK LOGGING CSV
         st.divider()
         st.markdown("**Apakah hasil ini akurat?** *(Bantu kami evaluasi sistem)*")
+        st.column_config
         col1, col2 = st.columns(2)
         with col1:
             if st.button("👍 Akurat", use_container_width=True):
@@ -229,7 +228,7 @@ if uploaded_file is not None:
                 st.toast("📝 Catatan evaluasi disimpan.")
 
     # ==========================================
-    # AUTOPLAY AUDIO
+    # AUTOPLAY AUDIO & DOWNLOAD Fitur
     # ==========================================
     try:
         with open(st.session_state.file_audio, "rb") as f:
@@ -238,5 +237,14 @@ if uploaded_file is not None:
             md = f'<audio autoplay><source src="data:audio/mp3;base64,{b64}" type="audio/mp3"></audio>'
             st.markdown(md, unsafe_allow_html=True)
             st.markdown("*🔊 (Sistem telah memutar suara...)*")
+            
+            # Tombol download dinamis membaca file mp3 yang sedang aktif
+            st.download_button(
+                label="📥 Unduh Hasil Audio Pemandu (MP3)",
+                data=data,
+                file_name=os.path.basename(st.session_state.file_audio),
+                mime="audio/mp3",
+                use_container_width=True
+            )
     except:
         pass

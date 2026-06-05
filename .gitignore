@@ -1,6 +1,3 @@
-# Jangan push file suara sampah hasil generate
-*.mp3
-
 # Jangan push cache python
 __pycache__/
 *.pyc
